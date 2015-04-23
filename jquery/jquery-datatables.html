@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Basic DataTables plugin usage</title>
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+
+	<table id="example"></table>
+
+	<script>
+		$.get("http://cancer3d.org/drug/php/drugActivity.php", function (data)
+        {
+            var myData = JSON.parse(data);   
+
+            $('#example').DataTable({
+                data: myData,
+                columns: [
+                	{ "title": "Engine" },
+            		{ "title": "Browser" },
+            		{ "title": "Platform" },
+            		{ "title": "Version", "class": "center" },
+            	]
+            });
+        });
+	</script>
+	
+</body>
+</html>
