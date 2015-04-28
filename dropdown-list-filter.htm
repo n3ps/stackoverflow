@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+  <style type="text/css">
+  select {    text-transform:capitalize;  }
+  </style>
+</head>
+<body>
+<form class="module faq">
+<ul>
+<li><a href="#" rel="categoryA">question 1</a></li>
+<li><a href="#" rel="categoryB">question 2</a></li>
+<li><a href="#" rel="">question 3</a></li>
+<li><a href="#" rel="categoryB">question 4</a></li>
+<li><a href="#" rel="categoryC">question 5</a></li>
+<li><a href="#" rel="categoryA">question 6</a></li>
+<li><a href="#" rel="categoryA">question 7</a></li>
+</ul>
+
+<p>Categories dropdown:</p>
+<select id="categoriesList"></select>
+
+<script type="text/javascript">
+var pairs = { categoryA : 'category A', categoryB : 'category B' };
+var desired = new Array('category1', 'category2');
+
+var catArray = jQuery('li a').map(function() {
+    return jQuery(this).attr('rel');
+}).get();
+
+
+// Remove empty - might be shortened
+        var categories = new Array();
+        for (k in catArray)
+            if (catArray[k])
+                categories.push(catArray[k]);
+/*
+var catDict = {};
+$.each(catArray, function() { catDict[this] = this; });
+catArray = [];
+for (var cat in catDict) {
+	catArray.push(cat);
+}
+*/
+jQuery.each(jQuery.unique(categories).sort(), function(value, text) {
+    jQuery('#categoriesList').append(
+        jQuery('<option></option>').val(text).html(text)
+    );
+});
+
+function filterList(value){
+	$(".faq li").hide();
+	$(".faq li a[rel='" + value + "']").parent().fadeIn('fast');
+}
+
+$("#categoriesList").bind("change", function() {
+	filterList($(this).val());
+});
+
+</script>
+</form>
+</body>
+</html>

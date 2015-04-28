@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+.answer {display:none;}</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<ul class="body">
+		<li>
+			<div class="question">question 1</div>
+			<div class="answer">answer 1</div>
+		</li>
+		<li>
+			<div class="question">question 2</div>
+			<div class="answer">answer 2</div>
+		</li>
+		<li>
+			<div class="question">question 3</div>
+			<div class="answer">answer 3</div>
+		</li>
+		<li>
+			<div class="question">question 4</div>
+			<div class="answer">answer 4</div>
+		</li>
+		<li>
+			<div class="question">question 5</div>
+			<div class="answer">answer 5</div>
+		</li>
+	</ul>
+	
+<script type="text/javascript">
+$('.question').click(function(){
+	//var items = $(this).parent().siblings().children('.answer');
+	
+	// look at this item first? if its visible, hide it, else unhide it
+	
+	var answer = $(this).next();
+	
+	if (answer.is(':visible')){
+		answer.slideUp('fast');	// hide	
+	}
+	
+	// then
+	// look at all other items if anyone is visible, hide it	
+	
+	else {
+		answer.slideDown('fast'); // show
+		$(this).parent().siblings().find('.answer:visible').slideUp('fast'); // hide
+	}
+/*
+	var items = $(this).parent().find('.answer:visible');
+	
+	items.each(function(){
+		$(this).slideDown('fast');
+	});
+*/	
+	//items.slideToggle('fast');
+	//.slideToggle('fast');
+});
+</script>
+</body>
+</html>
