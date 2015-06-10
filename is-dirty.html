@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Is Dirty</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+	<p>
+		<button id="save" disabled>Save</button>
+	</p>
+	<div>
+		<label><input type="checkbox" />Checkbox One </label>
+	</div>
+	<div>
+		<label><input type="checkbox" />Checkbox Two</label>
+	</div>
+	<div>
+		<label><input type="checkbox" checked />Checkbox Three</label>
+	</div>
+	<div>
+		<label><input type="checkbox" />Checkbox Four</label>
+	</div>
+
+	<script>
+	$(function () {
+		$(":checkbox").on("change", function () {
+			if ($(this).attr("data-dirty") == undefined) {
+				$(this).attr("data-dirty", "");
+			}
+			else {
+				$(this).removeAttr("data-dirty");
+			}
+
+			refreshSave();
+		});
+
+		function refreshSave() {
+			var modified = $(":checkbox").filter("[data-dirty]").length > 0;
+			$("#save").prop("disabled", !modified);
+		}
+	})
+	</script>
+</body>
+</html>
