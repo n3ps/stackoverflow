@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tablesorter (Dynamic)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.22.1/css/theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.22.1/js/jquery.tablesorter.js"></script>
+</head>
+<body>
+    
+    <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age (sort, then click cells)</th>
+            <th>Flag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ABC</td>
+            <td>10</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>JKL</td>
+            <td>3</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>XYZ</td>
+            <td>7</td>
+            <td>1</td>
+        </tr>
+    </tbody>
+    </table>
+    <script>
+        $(function() {
+          $("table").tablesorter();
+
+          $("td:nth-child(2)").click(function(){
+
+            var age = Math.floor(Math.random() * 100, 2);
+
+            $(this).text(age);
+
+            // update the table, so the tablesorter plugin can update its value
+            // set resort flag to false to prevent automatic resort (since we're using a different sort below)
+            $("table").trigger("updateCell", [this, false, null]);
+
+            return false;
+          });
+        });
+    </script>
+</body>
+</html>
